@@ -55,6 +55,7 @@ final class SousmissionController extends AbstractController
                
               
             }
+            $sousmission->setDate(new \DateTime());
             $entityManager->persist($sousmission);
             $entityManager->flush();
 

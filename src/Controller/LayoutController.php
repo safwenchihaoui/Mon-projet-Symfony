@@ -232,11 +232,14 @@ final class LayoutController extends AbstractController
                 }
                 $sousmission->setFichier($newFilename);
             }
-    
+            $sousmission->setDate(new \DateTime());
+            
+            var_dump($sousmission->getDate());
+            die();
             $entityManager->persist($sousmission);
             $entityManager->flush();
     
-            $this->addFlash('notice', 'La soumission a été créée avec succès !');
+           
     
             return $this->redirectToRoute('app_homepage', [], Response::HTTP_SEE_OTHER);
         }

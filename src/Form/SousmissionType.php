@@ -47,9 +47,7 @@ class SousmissionType extends AbstractType
                 ],
             ])
             
-            ->add('date', null, [
-                'widget' => 'single_text',
-            ])
+           
             ->add('nom_auteur_correspond')
             ->add('prenom_auteur_correspond')
             ->add('email_auteur_correspond', EmailType::class, [
