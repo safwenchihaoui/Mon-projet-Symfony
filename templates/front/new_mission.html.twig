@@ -80,7 +80,7 @@
 					</div>
 					<div class="col-md-10">
 						<div id="auteurs-wrapper" data-prototype="{{ form_widget(form.auteurs.vars.prototype)|e('html_attr') }}">
-							{% for auteurForm in Sousmission.auteurs %}
+							{% for auteurForm in form.auteurs %}
 								<div class="row auteur-form mb-3">
 									<div class="col-md-4">
 										{{ form_row(auteurForm.nom, {'label': 'Nom', 'label_attr': {'class': 'text-primary'}}) }}

@@ -185,9 +185,8 @@ final class LayoutController extends AbstractController
     
 
 
-    #[Route('/soumission', name: 'app_soumission_new')]
-
-    public function new( 
+    #[Route('/soumission', name: 'app_soumission_new',methods:['POST','GET'])]
+    public function new(
         Request $request,
         CategorieRecommandRepository $categorieRecommandRepository,
         EntityManagerInterface $entityManager,
@@ -195,60 +194,61 @@ final class LayoutController extends AbstractController
         EvennementRepository $evennementRepository,
         SluggerInterface $slugger,
         AuteurRepository $auteurRepository,
-       
-        
-
+         int $id=1
     ): Response {
+        
         
         $categorieRecommands = $categorieRecommandRepository->findAll();
         
-        $evennementId = $request->get('evennement');
-        $evennement = $evennementRepository->find($evennementId);
+        $evennement=$evennementRepository->findOneBy(['id'=>$id]);
        
         $sousmission = new Sousmission();
         $form = $this->createForm(SousmissionType::class, $sousmission);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            $sousmission->setEvennement( $evennement);
+            
+            $sousmission->setEvennement($evennement);
+    
             
             foreach ($sousmission->getAuteurs() as $auteur) {
-                $auteur->setSousmission($sousmission); 
-                
+                $auteur->setSousmission($sousmission);
             }
-         
+            
+           
             $fichier = $form->get('fichier')->getData();
-            if ($fichier ) {
+            if ($fichier) {
                 $originalFilename = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
-             
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$fichier->guessExtension();
-                
+    
                 try {
                     $fichier->move(
                         $this->getParameter('fichierSoumission_directory'),
                         $newFilename
                     );
-                   
                 } catch (FileException $e) {
-               
+                    
                 }
-                $sousmission->setfichier(fichier: $newFilename);
-            }   
+                $sousmission->setFichier($newFilename);
+            }
+    
             $entityManager->persist($sousmission);
             $entityManager->flush();
-           
-
+    
+            $this->addFlash('notice', 'La soumission a été créée avec succès !');
+    
             return $this->redirectToRoute('app_homepage', [], Response::HTTP_SEE_OTHER);
         }
+        
         return $this->render('front/new_mission.html.twig', [
             'CategorieRecommands' => $categorieRecommands,
-            'Sousmission' => $sousmission,
-            'form' => $form->createView(),
-            
-            
+            'sousmission'         => $sousmission,  
+            'form'                => $form->createView(),
+            'id'=>$id
         ]);
     }
+    
     #[Route('/{id}/soumission/edit', name: 'app_soumission_edit')]
 
     public function edit( $id,
