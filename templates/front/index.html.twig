@@ -1,0 +1,363 @@
+{%   extends 'base.html.twig' %}
+
+{% block stylesheet %}
+ {{parent()}}
+  
+{% endblock %}
+
+{% block navbar %}
+   {{parent()}}
+{% endblock %}
+
+{% block body %}
+
+
+
+      <!--carousel-->
+      {%  if sliders is not empty %} 
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+              {% for  slide in sliders %}
+            <li data-target="#carouselExampleIndicators {% if loop.first %}active{% endif %}" data-slide-to="0"  ></li>
+                  {% endfor %}
+          </ol>
+        <div class="carousel-inner ">
+          {% for slide in sliders %}
+          <div class="carousel-item {% if loop.first %}active{% endif %} ">
+                  <img src="{{asset('/uploads/' ~ slide.image)}}" class="d-block w-100" alt="{{slide.titre}}">
+              </div>
+            
+          {% endfor %}
+          
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      {% endif %} 
+      <!--endcarousel-->
+      <!-- Section -->
+          <div class="container-xxl py-5">
+              <div class="container">
+                  <div class="row g-4">
+                      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                          <div class="service-item text-center pt-3">
+                              <div class="p-4">
+                                  <i class="fa fa-3x fa-graduation-cap text-info mb-4"></i>
+                                  <h5 class="mb-3">categorie 1 </h5>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                          <div class="service-item text-center pt-3">
+                              <div class="p-4">
+                                <i class="fa fa-3x fa-graduation-cap text-info mb-4"></i>
+                                  <h5 class="mb-3">Categorie 2</h5>
+                              
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                          <div class="service-item text-center pt-3">
+                              <div class="p-4">
+                                <i class="fa fa-3x fa-graduation-cap text-info mb-4"></i>
+                                  <h5 class="mb-3">Categorie 3</h5>
+                                
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                          <div class="service-item text-center pt-3">
+                              <div class="p-4">
+                                <i class="fa fa-3x fa-graduation-cap text-info mb-4"></i>
+                                  <h5 class="mb-3">Categorie 4</h5>
+                                
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- Service End -->
+
+
+      <!--section-->
+      <div class="container-xxl py-5">
+              <div class="container">
+                  <div class="row g-5">
+                      <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                          <div class="position-relative h-100">
+                              <img class="img-fluid position-absolute w-100 h-100" src="img/cat-4.jpg" alt="" style="object-fit: cover;">
+                          </div>
+                      </div>
+                      <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                          <h6 class="section-title bg-white text-start text-white pe-3" >
+                          
+                          
+                          <h1 class="mb-4">Mon_Projet</h1>
+                          <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                          <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                          <div class="row gy-2 gx-4 mb-4">
+                              <div class="col-sm-4">
+                                  <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>definition</p>
+                              </div>
+                              <div class="col-sm-4">
+                                  <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>caracteristique</p>
+                              </div>
+                              
+                          </div>
+                          <a class="btn btn-primary py-3 px-5 mt-2" href="">Lire</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+
+      <!--endsection-->
+      <!-- section-->
+      <div class="container-xxl py-5  bg-light mt-6 pt-6">
+              <div class="container">
+                  <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                      <h6 class="section-title  text-center text-primary px-3">Calendrier</h6>
+                      <h1 class="mb-5">Nos Evennemts</h1>
+                  </div>
+              <div class="row g-4">
+                  <div class="card m-4" style="width: 18rem;">
+                  <img src="/img/examples/product1.jpg" class="card-img-top" alt="image">
+                    <div class="card-body">
+                    <h5 class="card-title">event 1</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">read more</a>
+                    </div>
+                    </div>
+              
+                  <div class="card m-4" style="width: 18rem;">
+                      <img src="/img/examples/product7.jpg" class="card-img-top" alt="image">
+                      <div class="card-body">
+                      <h5 class="card-title">event 2</h5>
+                      <p class="card-text"></p>
+                      <a href="#" class="btn btn-primary">read more</a>
+                      </div>
+                    </div>
+                  <div class="card m-4" style="width: 18rem;">
+                  <img src="/img/examples/product8.jpg" class="card-img-top" alt="image">
+                    <div class="card-body">
+                    <h5 class="card-title">event 3</h5>
+                      <p class="card-text">some quick example text to build on the card title and make up the bulk of the card's content</p>
+                    <a href="#" class="btn btn-primary">read more</a>
+                  </div>
+                  </div>
+                  
+                  <div class="card " style="width: 18rem;">
+                    <img src="/img/examples/product5.jpg" class="card-img-top" alt="image">
+                    <div class="card-body">
+                      <h5 class="card-title">event 4</h5>
+                      <p class="card-text">some quick example text to build on the card title and make up the bulk of the card's content</p>
+                      <a href="#" class="btn btn-primary">read more</a>
+                    </div>
+                  </div>
+                    </div>
+                </div>
+      <!--endsection-->
+
+      <!--section-->
+      <section  class="yyy py-3 py-md-5 py-xl-8 pt-5 mt-5">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+              <h2 class="mb-4 display-5 fw-bold text-center">Our Users</h2>
+              <p class="text-secondary mb-5 text-center lead fs-4">We are a group of innovative, experienced, and proficient teams. You will love to collaborate with us.</p>
+              <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+            </div>
+          </div>
+        </div>
+
+        <div class="container overflow-hidden">
+          <div class="row gy-4 gy-lg-0 gx-xxl-5">
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+                <div class="card-body p-0">
+                  <figure class="m-0 p-0" >
+                    <img class="img-fluid" loading="lazy" src="/img/profile2.jpg" alt="Flora Nyra">
+                    <figcaption class="m-0 p-4">
+                      <h4 class="mb-1">user 1</h4>
+                      <p class="text-secondary mb-0">Product Manager</p>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+                <div class="card-body p-0">
+                  <figure class="m-0 p-0">
+                    <img   class="img-fluid" loading="lazy" src="/img/profile.jpg" alt="Evander Mac">
+                    <figcaption class="m-0 p-4">
+                      <h4 class="mb-1">user 2</h4>
+                      <p class="text-secondary mb-0">Art Director</p>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+                <div class="card-body p-0">
+                  <figure class="m-0 p-0">
+                    <img class="img-fluid" loading="lazy" src="/img/sauro.jpg" alt="Taytum Elia">
+                    <figcaption class="m-0 p-4">
+                      <h4 class="mb-1">user 3</h4>
+                      <p class="text-secondary mb-0">Investment Planner</p>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+              <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+                <div class="card-body p-0">
+                  <figure class="m-0 p-0">
+                    <img class="img-fluid" loading="lazy" src="/img/mlane.jpg" alt="Wylder Elio">
+                    <figcaption class="m-0 p-4">
+                      <h4 class="mb-1">user 4</h4>
+                      <p class="text-secondary mb-0">Financial Analyst</p>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--endsection-->
+
+      <!-- section-->
+      <section class="bg-secondary py-5 py-xl-6 pt-5 mt-5">
+        <div class="container mb-5 mb-md-6">
+          <div class="row justify-content-md-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6 text-center">
+              <hr class="w-50 mx-auto mb-0 text-secondary">
+            </div>
+          </div>
+        </div>
+        <div class="container overflow-hidden">
+          <div class="row gy-5 gy-md-6 gy-lg-0">
+            <div class="col-6 col-lg-3">
+              <div class="text-center">
+                <div class="d-flex align-items-center justify-content-center bg- rounded-circle w-100px h-100px mb-3 mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-people text-white" viewBox="0 0 16 16">
+                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                  </svg>
+                </div>
+                <h5 class="display-6 fw-bold m-1">120K</h5>
+                <p class="text-white m-0">Happy Customers</p>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="text-center">
+                <div class="d-flex align-items-center justify-content-center bg rounded-circle w-100px h-100px mb-3 mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-activity text-white" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z" />
+                  </svg>
+                </div>
+                <h5 class="display-6 fw-bold m-1">1890+</h5>
+                <p class="text-white m-0">Issues Solved</p>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="text-center">
+                <div class="d-flex align-items-center justify-content-center bg- rounded-circle w-100px h-100px mb-3 mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-briefcase text-white" viewBox="0 0 16 16">
+                    <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z" />
+                  </svg>
+                </div>
+                <h5 class="display-6 fw-bold m-1">250K</h5>
+                <p class="text-white m-0">Finished Projects</p>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="text-center">
+                <div class="d-flex align-items-center justify-content-center bg rounded-circle w-100px h-100px mb-3 mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-award text-white" viewBox="0 0 16 16">
+                    <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68L9.669.864zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702 1.509.229z" />
+                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
+                  </svg>
+                </div>
+                <h5 class="display-6 fw-bold m-1">786+</h5>
+                <p class="text-white m-0">Awwwards Winning</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--endsection-->
+
+
+          {% block footer %}
+
+
+              <footer class="bg-body-secondary bg-gradient text-center text-lg-start mt-5 pt-5">
+                <!-- Grid container -->
+                <div class="container p-4 pb-0">
+                  <form action="">
+                    <!--Grid row-->
+                    <div class="row">
+                      <!--Grid column-->
+                      <div class="col-auto mb-4 mb-md-0">
+                        <p class="pt-2">
+                          <strong>Sign up </strong>
+                        </p>
+                      </div>
+
+                      <!--Grid column-->
+
+                      <!--Grid column-->
+                      <div class="col-md-5 col-12 mb-4 mb-md-0">
+                        <!-- Email input -->
+                        <div data-mdb-input-init class="form-outline mb-4">
+                          <input type="email" id="form5Example22" class="form-control" />
+                          <label class="form-label" for="form5Example22">Email address</label>
+                        </div>
+                      </div>
+                      <!--Grid column-->
+
+                      <!--Grid column-->
+                      <div class="col-auto mb-4 mb-md-0">
+                        <!-- Submit button -->
+                        <button data-mdb-ripple-init type="button" class="btn btn-primary mb-4">
+                          Subscribe
+                        </button>
+                      </div>
+                      <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                  </form>
+                </div>
+                <!-- Grid container -->
+
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+                  © 2025 Copyright:
+                  <a class="text-body" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                </div>
+                <!-- Copyright -->
+              </footer>
+              <!-- Footer -->
+          {% endblock %}
+
+            {% block javascript %}
+              {{parent()}}
+              
+            {% endblock %}
+
+
+{% endblock %}
+

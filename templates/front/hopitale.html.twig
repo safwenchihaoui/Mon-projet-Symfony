@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet %}
+	{{parent()}}
+	<link rel="stylesheet" href="{{asset('css/type.css')}}"/>
+{% endblock %}
+
+{% block navbar %}
+	{{parent()}}
+{% endblock %}
+
+{%  block body %}
+
+	<div class="container mt-5">
+		<h6 class="text-center">CHU</h6>
+		<h2 class="text-center">Centres Hospitalo-Universitaires</h2>
+		<div class="row mt-4">
+			{% for hopital in hopitaux %}
+
+				<div class="col-4 mt-5">
+					<div class="card" style="width: 18rem;">
+						<img src="{{ asset('img/' ~ hopital.image) }}" class="card-img-top" alt=" {{ hopital.nom }}">
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">{{ hopital.nom }}</h5>
+						<a href="{{ path('app_Hopital',{'id':hopital.id}) }}" class="btn btn-primary">Voir les contacts</a>
+    
+					</div>
+
+
+				</div>
+
+			{% endfor %}
+
+
+		</div>
+	</div>
+
+	{% block javascript %}
+		{{parent()}}
+	{% endblock %}
+{% endblock %}

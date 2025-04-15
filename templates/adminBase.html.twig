@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>mon Site</title>
+		<meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+
+		{% block stylesheet %}
+			<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
+			<link rel="stylesheet" href="{{asset('css/plugins.min.css')}}"/>
+			<link rel="stylesheet" href="{{asset('css/kaiadmin.min.css')}}"/>
+			<link rel="stylesheet" href="{{asset('css/demo.css')}}"/>
+			<link rel="stylesheet" href="{{asset('css/fonts.min.css')}}"/>
+			<link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css"/>
+
+
+		{% endblock %}
+		{% block sidebar %}
+			<div
+				class="wrapper">
+
+				<!-- Sidebar -->
+				<div class="sidebar" data-background-color="dark">
+					<div
+						class="sidebar-logo">
+						<!-- Logo Header -->
+						<div class="logo-header" data-background-color="dark">
+							<a href="index.html" class="logo">
+								<img src="{{asset('img/tek.png')}}" alt="navbar brand" class="navbar-brand" height="20"/>
+							</a>
+							<div class="nav-toggle">
+								<button class="btn btn-toggle toggle-sidebar">
+									<i class="gg-menu-right"></i>
+								</button>
+								<button class="btn btn-toggle sidenav-toggler">
+									<i class="gg-menu-left"></i>
+								</button>
+							</div>
+							<button class="topbar-toggler more">
+								<i class="gg-more-vertical-alt"></i>
+							</button>
+						</div>
+						<!-- End Logo Header -->
+					</div>
+					<div class="sidebar-wrapper scrollbar scrollbar-inner">
+						<div class="sidebar-content">
+							<ul class="nav nav-secondary">
+								<li class="nav-item active">
+									<a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+										<i class="fas fa-home"></i>
+										<p>Dashboard</p>
+
+
+									</a>
+
+								</li>
+								<li class="nav-section">
+									<span class="sidebar-mini-icon">
+										<i class="fa fa-ellipsis-h"></i>
+									</span>
+									<h4 class="text-section">Components</h4>
+								</li>
+								
+								{# <li class="nav-item">
+									<a data-bs-toggle="collapse" href="#forms">
+										<i class="fas fa-pen-square"></i>
+										<p>SouscategorieRecommand</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="forms">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_souscategorie_recommand_new')}}">
+													<span class="sub-item">Ajout</span>
+												</a>
+											</li>
+											<li>
+												<a href="{{path('app_souscategorie_recommand_index')}}">
+													<span class="sub-item">index</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li> #}
+								
+								
+
+								{# <li class="nav-item">
+									<a data-bs-toggle="collapse" href="#charts">
+										<i class="far fa-chart-bar"></i>
+										<p>CategorieRecommand</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="charts">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_categorie_recommand_new')}}">
+													<span class="sub-item">new</span>
+												</a>
+											</li>
+											<li>
+												<a href="{{path('app_categorie_recommand_index')}}">
+													<span class="sub-item">liste</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li> #}
+								<li class="nav-item">
+									<a data-bs-toggle="collapse" href="#charts">
+										<i class="far fa-chart-bar"></i>
+										<p>Sousmission</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="charts">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_sousmission_new')}}">
+													<span class="sub-item">new</span>
+												</a>
+											</li>
+											<li>
+												<a href="{{path('app_sousmission_index')}}">
+													<span class="sub-item">liste</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								{# <li class="nav-item">
+									<a data-bs-toggle="collapse" href="#submenu">
+										<i class="fas fa-bars"></i>
+										<p>Recommandation</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="submenu">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_recommandation_new')}}">
+													<span class="sub-item">new</span>
+
+												</a>
+
+											</li>
+											<li>
+												<a href="{{path('app_recommandation_index')}}">
+													<span class="sub-item">liste</span>
+
+												</a>
+
+											</li>
+
+										</ul>
+									</div>
+								</li> #}
+								<li class="nav-item">
+									<a data-bs-toggle="collapse" href="#submenu">
+										<i class="fas fa-bars"></i>
+										<p>Auteurs</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="submenu">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_auteur_new')}}">
+													<span class="sub-item">new</span>
+
+												</a>
+
+											</li>
+											<li>
+												<a href="{{path('app_auteur_index')}}">
+													<span class="sub-item">liste</span>
+
+												</a>
+
+											</li>
+
+										</ul>
+									</div>
+								</li>
+								<li class="nav-item">
+									<a data-bs-toggle="collapse" href="#tables">
+										<i class="fas fa-table"></i>
+										<p>Users</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="tables">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_login')}}">
+													<span class="sub-item">ajout</span>
+												</a>
+											</li>
+											<li>
+												<a href="{{path('app_register')}}">
+													<span class="sub-item">enregistre</span>
+												</a>
+												<a href="{{path('app_user_index')}}">
+													<span class="sub-item">liste</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								 <li class="nav-item">
+											<a data-bs-toggle="collapse" href="#maps">
+												<i class="fas fa-map-marker-alt"></i>
+												<p>Events</p>
+												<span class="caret"></span>
+											</a>
+											<div class="collapse" id="maps">
+												<ul class="nav nav-collapse">
+													<li>
+														<a href="{{path('app_evennement_new')}}">
+															<span class="sub-item">ajout</span>
+														</a>
+													</li>
+													<li>
+														<a href="{{path('app_evennement_index')}}">
+															<span class="sub-item">liste</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</li> 
+
+								<li class="nav-item">
+									<a data-bs-toggle="collapse" href="#bmenu">
+										<i class="fas fa-bars"></i>
+										<p>Slider</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="bmenu">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{ path('app_slider_new') }}">
+													<span class="sub-item">ajout</span>
+
+												</a>
+
+											</li>
+											<li>
+												<a href="{{ path('app_slider_index') }}">
+													<span class="sub-item">liste</span>
+
+												</a>
+
+											</li>
+
+										</ul>
+									</div>
+								</li>
+								{# <li class="nav-item">
+																																	<a data-bs-toggle="collapse" href="#base">
+																																		<i class="fa-solid fa-user"></i>
+																																		<p>Docteur</p>
+																																		<span class="caret"></span>
+																																	</a>
+																																	<div class="collapse" id="base">
+																																		<ul class="nav nav-collapse">
+																								
+																								
+																																			<li>
+																																				<a href="{{path('app_docteur_new')}}">
+																																					<span class="sub-item">Ajout</span>
+																																				</a>
+																																			</li>
+																																			<li>
+																																				<a href="{{path('app_docteur_index')}}">
+																																					<span class="sub-item">Index</span>
+																																				</a>
+																																			</li>
+																								
+																								
+																																		</ul>
+																																	</div>
+																																</li> #}
+
+								{# <li class="nav-item">
+																	<a data-bs-toggle="collapse" href="#sidebarLayouts">
+																		<i class="fas fa-th-list"></i>
+																		<p>Hopital</p>
+																		<span class="caret"></span>
+																	</a>
+																	<div class="collapse" id="sidebarLayouts">
+																		<ul class="nav nav-collapse">
+																			<li>
+																				<a href="{{path('app_hopital_new')}}">
+																					<span class="sub-item">Ajout</span>
+																				</a>
+																			</li>
+																			<li>
+																				<a href="{{path('app_hopital_index')}}">
+																					<span class="sub-item">Index</span>
+																				</a>
+																			</li>
+																		</ul>
+																	</div>
+																</li> #}
+
+
+								<li class="nav-item">
+									<a data-bs-toggle="collapse" href="#sidebarLayouts">
+										<i class="fas fa-th-list"></i>
+										<p>OUTIL</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="sidebarLayouts">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_outil_new')}}">
+													<span class="sub-item">Ajout</span>
+												</a>
+											</li>
+											<li>
+												<a href="{{path('app_outil_index')}}">
+													<span class="sub-item">Index</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+
+								<li class="nav-item">
+									<a data-bs-toggle="collapse" href="#base">
+										<i class="fas fa-th-list"></i>
+										<p>souscategorieOutil</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="base">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_souscategorie_outil_new')}}">
+													<span class="sub-item">Ajout</span>
+												</a>
+											</li>
+											<li>
+												<a href="{{path('app_souscategorie_outil_index')}}">
+													<span class="sub-item">Index</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="nav-item">
+									<a data-bs-toggle="collapse" href="#forms">
+										<i class="fas fa-pen-square"></i>
+										<p>categorieOutil</p>
+										<span class="caret"></span>
+									</a>
+									<div class="collapse" id="forms">
+										<ul class="nav nav-collapse">
+											<li>
+												<a href="{{path('app_categorie_outil_new')}}">
+													<span class="sub-item">Ajout</span>
+												</a>
+											</li>
+											<li>
+												<a href="{{path('app_categorie_outil_index')}}">
+													<span class="sub-item">index</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+
+
+							</ul>
+						</div>
+					</div>
+
+
+				</div>
+				<!-- End Sidebar -->
+			{% endblock %}
+
+		</head>
+		<body>
+
+
+			{% block Dashboard %}
+				<div class="main-panel">
+					<div class="container">
+						<div class="page-inner">
+							<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+
+								<div>
+									<h3 class="fw-bold mb-3">Dashboard</h3>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+					{% block footer %}
+
+
+						<footer class="footer">
+							<div class="container-fluid d-flex justify-content-between">
+								<nav class="pull-left">
+									<ul class="nav"></ul>
+								</nav>
+								<div class="copyright">
+									2024, made with
+									<i class="fa fa-heart heart text-danger"></i>
+									by
+									<a href="http://www.themekita.com">Symfony</a>
+								</div>
+								<div>
+									Distributed by
+									<a target="_blank" href="https://themewagon.com/">Mon_Site</a>.
+								</div>
+							</div>
+						</footer>
+
+
+					{% endblock %}
+				</div>
+
+
+			{% endblock %}
+
+
+			{% block javascript %} <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+				 <script src="{{asset('js/plugin/webfont/webfont.min.js')}}"></script>
+				 <script>
+																				            WebFont.load({
+																				              google: { families: ["Public Sans:300,400,500,600,700"] },
+																				              custom: {
+																				                families: [
+																				                  "Font Awesome 5 Solid",
+																				                  "Font Awesome 5 Regular",
+																				                  "Font Awesome 5 Brands",
+																				                  "simple-line-icons",
+																				                ],
+																				                urls: ["{{asset('css/fonts.min.css')}}"],
+																				              },
+																				              active: function () {
+																				                sessionStorage.fonts = true;
+																				              },
+																				            });
+																				          </script>
+				 <script src="{{asset('js/core/jquery-3.7.1.min.js')}}"></script>
+				 <script src="{{asset('js/core/popper.min.js')}}"></script>
+				 <script src="{{asset('js/core/bootstrap.min.js')}}"></script>
+
+				<!-- jQuery Scrollbar -->
+				 <script src="{{asset('js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+
+				<!-- Chart JS -->
+				 <script src="{{asset('js/plugin/chart.js/chart.min.js')}}"></script>
+
+				<!-- jQuery Sparkline -->
+				 <script src="{{asset('js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
+
+				<!-- Chart Circle -->
+				 <script src="{{asset('js/plugin/chart-circle/circles.min.js')}}"></script>
+
+				<!-- Datatables -->
+				 <script src="{{asset('js/plugin/datatables/datatables.min.js')}}"></script>
+
+				<!-- Bootstrap Notify -->
+				 <script src="{{asset('js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+
+				<!-- jQuery Vector Maps -->
+				 <script src="{{asset('js/plugin/jsvectormap/jsvectormap.min.js')}}"></script>
+				 <script src="{{asset('js/plugin/jsvectormap/world.js')}}"></script>
+
+				<!-- Sweet Alert -->
+				 <script src="{{asset('js/plugin/sweetalert/sweetalert.min.js')}}"></script>
+
+				<!-- Kaiadmin JS -->
+				 <script src="{{asset('js/kaiadmin.min.js')}}"></script>
+
+				<!-- Kaiadmin DEMO methods, don't include it in your project! -->
+				 <script src="{{asset('js/setting-demo.js')}}"></script>
+				 <script src="{{asset('js/demo.js')}}"></script>
+				 <script>
+																				        $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+																				          type: "line",
+																				          height: "70",
+																				          width: "100%",
+																				          lineWidth: "2",
+																				          lineColor: "#177dff",
+																				          fillColor: "rgba(23, 125, 255, 0.14)",
+																				        });
+																				
+																				        $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+																				          type: "line",
+																				          height: "70",
+																				          width: "100%",
+																				          lineWidth: "2",
+																				          lineColor: "#f3545d",
+																				          fillColor: "rgba(243, 84, 93, .14)",
+																				        });
+																				
+																				        $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+																				          type: "line",
+																				          height: "70",
+																				          width: "100%",
+																				          lineWidth: "2",
+																				          lineColor: "#ffa534",
+																				          fillColor: "rgba(255, 165, 52, .14)",
+																				        });
+																				      </script>
+
+
+				 <script>
+																				        $(document).ready(function() {
+																				            $('#myTable').DataTable();
+																				        });
+																				      </script>
+																					  <script>
+						    document.addEventListener('DOMContentLoaded', () => {
+						        const wrapper = document.getElementById('auteurs-wrapper');
+						        const addButton = document.getElementById('add-auteur');
+						        let index = wrapper.querySelectorAll('.auteur-form').length;
+						
+						        addButton.addEventListener('click', () => {
+						            const prototype = wrapper.dataset.prototype;
+						            const newForm = prototype.replace(/__name__/g, index);
+						            const formDiv = document.createElement('div');
+						            formDiv.classList.add('row', 'auteur-form', 'mb-3');
+						            formDiv.innerHTML =
+									      `
+						                <div class="col-md-4">${newForm.match(/(Nom.*?)<\/div>/s)[0]}</div>
+						                <div class="col-md-4">${newForm.match(/(Prenom.*?)<\/div>/s)[0]}</div>
+						                <div class="col-md-3">${newForm.match(/(Email.*?)<\/div>/s)[0]}</div>
+										<div class="col-md-1 d-flex align-items-center">
+	                                         <button type="button" class="btn btn-danger btn-sm remove-auteur">supprime</button>
+	                                       </div>
+						                `;
+						            wrapper.appendChild(formDiv);
+						            index++;
+						        });
+						
+						        wrapper.addEventListener('click', function (e) {
+						            if (e.target.classList.contains('remove-auteur')) {
+						                e.target.closest('.auteur-form').remove();
+						            }
+						        });
+						    });
+				</script>
+			{% endblock %}
+		</body>
+	</head>
+</html>

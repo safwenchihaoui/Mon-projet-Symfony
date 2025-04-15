@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+   
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.titre,{'attr':{'class':'form-control'}}
+,{}
+) }}
+</div>
+</div>
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.CategorieRecommand,{'attr':{'class':'form-control'}}) }}
+</div>
+</div>
+<br>
+    <button class="btn btn-info">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

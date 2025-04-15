@@ -1,0 +1,75 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block stylesheet %}
+ {{parent()}}
+{% endblock %}
+{% block sidebar %}
+ {{parent()}}
+{% endblock %}
+
+
+
+    
+        {% block Dashboard %}
+                    <div class="main-panel">
+                            <div class="container">
+                                <div class="page-inner">
+                                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4" >
+                                        <div>
+                                        <h3 class="fw-bold mb-3">Dashboard</h3>
+                                        
+                                        </div>
+                                     </div> 
+                                    <table id="myTable"class="table" width="100%%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Titre</th>
+                                                        <th>Description</th>
+                                                        <th>actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for recommandation in recommandations %}
+                                                    <tr>
+                                                        <td>{{ recommandation.id }}</td>
+                                                        <td>{{ recommandation.titre }}</td>
+                                                        <td>{{ recommandation.description }}</td>
+                                                         <td>
+                                                            <a href="{{ path('app_recommandation_show', {'id': recommandation.id}) }}" class="btn btn-success">show</a>
+                                                            <a href="{{ path('app_recommandation_edit', {'id': recommandation.id}) }}" class="btn btn-info">edit</a>
+                                                        </td>
+                                                    </tr>
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="7">no records found</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+
+                                            <a href="{{ path('app_recommandation_new') }}"  class="btn btn-info">Create new</a>
+                                </div>
+                            </div>
+
+                        {% block footer %}
+                         {{parent()}}
+                        {% endblock %} 
+                    </div>
+
+        {% endblock %} 
+
+  
+
+
+
+
+    
+
+        {% block javascript %}
+        {{parent()}}
+        {% endblock %}  
+
+
+
+

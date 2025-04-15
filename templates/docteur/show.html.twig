@@ -1,0 +1,107 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block stylesheet %}
+   {{parent()}}
+{% endblock %}
+
+
+
+{% block Dashboard %}
+    <div class="main-panel">
+          <div class="container">
+            <div class="page-inner">
+              <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4" >
+               
+                            <div>
+                              <h3 class="fw-bold mb-3"></h3>
+              
+                           </div>
+              
+                </div>
+
+             <table id="myTable" class="table table-striped table-bordered" style="width:100%">
+                                <tbody>
+                                    <tr>
+                                        <th>Id</th>
+                                        <td>{{ docteur.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <td>{{ docteur.nom }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ docteur.email }}</td>
+                                    </tr>
+                                   <tr>
+                                   {% if docteur.image != null %}
+                                        <th>Image</th>
+                                        
+                                        <td> <img src="{{ asset('img/' ~ docteur.image) }}" width="100"    alt="{{ docteur.nom }}"></td>
+                                    {% endif %}  
+
+                                    <tr>
+                                        <th>Designation</th>
+                                        <td>{{ docteur.designation }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Chef</th>
+                                        <td>
+                                            {% if 'Chef' in docteur.designation %}
+                                                    yes
+                                                {% else %}
+                                                    No
+                                                {% endif %}
+
+                                        </td>
+                                     </tr>
+
+                                </tbody>
+                            </table>
+
+                            <a href="{{ path('app_docteur_index') }}" class="btn btn-info">back to list</a>
+
+                            <a href="{{ path('app_docteur_edit', {'id': docteur.id}) }}" class="btn btn-warning">edit</a>
+
+                            {{ include('docteur/_delete_form.html.twig') }}
+              </div>
+           </div>
+          
+
+     
+    
+                    {% block footer %}
+
+
+
+                            
+                            <footer class="footer">
+                            <div class="container-fluid d-flex justify-content-between">
+                                <nav class="pull-left">
+                                <ul class="nav">
+                                
+                                
+                                </ul>
+                                </nav>
+                                <div class="copyright">
+                                2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                                <a href="http://www.themekita.com">Symfony</a>
+                                </div>
+                                <div>
+                                Distributed by
+                                <a target="_blank" href="https://themewagon.com/">Mon_Site</a>.
+                                </div>
+                            </div>
+                            </footer>
+                        
+
+                    {% endblock %}
+    </div> 
+
+{% endblock %}
+
+ {% block javascript %}
+  {{parent()}}
+
+{% endblock %}               
+

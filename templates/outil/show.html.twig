@@ -1,0 +1,87 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block stylesheet %}
+	{{parent()}}
+{% endblock %}
+
+{% block Dashboard %}
+	<div class="main-panel">
+		<div class="container">
+			<div class="page-inner">
+				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"></div>
+
+
+				<h1>Outil</h1>
+
+				<table id="myTable" class="table" width="100%">
+					<tbody>
+						<tr>
+							<th>Id</th>
+							<td>{{ outil.id }}</td>
+						</tr>
+						<tr>
+							<th>Titre</th>
+							<td>{{ outil.titre }}</td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td>{{ outil.description }}</td>
+						</tr>
+						
+                        <tr>
+                              <th>Image</th>
+                           <td> <img src="{{ asset('/img/'~ outil.image) }}" width="100"   alt=""></td>
+
+                          </tr>
+                          <tr>
+                              <th>Pdf</th>
+                              <td><a href="{{outil.pdf}}" target="_blank">{{ outil.pdf }}   </td>
+                          </tr>
+                          <tr>
+                              <th>Lien</th>
+                              <td><a href="{{outil.lien}}" target="_blank" >{{outil.lien}}</a></td>
+                          </tr>
+					</tbody>
+				</table>
+
+				<a href="{{ path('app_outil_index') }}" class="btn btn-primary">back to list</a>
+
+				<a href="{{ path('app_outil_edit', {'id': outil.id}) }}" class="btn btn-info">edit</a>
+
+				{{ include('outil/_delete_form.html.twig') }}
+			</div>
+		</div>
+
+
+		{% block footer %}
+
+
+			<footer class="footer">
+				<div class="container-fluid d-flex justify-content-between">
+					<nav class="pull-left">
+						<ul class="nav"></ul>
+					</nav>
+					<div class="copyright">
+						2024, made with
+						<i class="fa fa-heart heart text-danger"></i>
+						by
+						<a href="http://www.themekita.com">Symfony</a>
+					</div>
+					<div>
+						Distributed by
+						<a target="_blank" href="https://themewagon.com/">Mon_Site</a>.
+					</div>
+				</div>
+			</footer>
+
+
+		{% endblock %}
+	</div>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+	{{parent()}}
+{% endblock %}

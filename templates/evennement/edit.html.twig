@@ -1,0 +1,38 @@
+{% extends 'adminbase.html.twig' %}
+
+
+{% block stylesheet %}
+{{parent()}}
+
+{% endblock %}
+
+{% block body %}
+   
+    
+
+          
+    
+     <div class="main-panel">
+    <div class="container">
+        <div class="page-inner">
+            <div class="container">
+            <div class="page-inner">
+                <div class="row justify-content-center">
+                 <div class="col-10 text-primary">
+                    <h5 class="text-center text-secondery mt-4 pt-4 display-1 fw-bold">edit_evennement</h5>
+
+                            {{ include('evennement/_form.html.twig') }}
+
+                            <a href="{{ path('app_evennement_index') }}">back to list</a> 
+                            {{ include('evennement/_delete_form.html.twig') }}
+                </div>
+                </div>
+                
+                </div>
+              
+            </div>
+            </div>
+        </div>
+    
+    </div>     
+    </div>

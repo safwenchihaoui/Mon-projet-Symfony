@@ -1,0 +1,48 @@
+
+
+
+{{ form_start(form) }}
+
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.nom,{'attr':{'class':'form-control'}}
+,{}
+) }}
+</div>
+</div>
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.designation,{'attr':{'class':'form-control'}}) }}
+</div>
+</div>
+
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.email,{'attr':{'class':'form-control'}}) }}
+</div>
+</div>
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.image,{'attr':{'class':'form-control'}}) }}
+</div>
+</div>
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.chef,{'attr':{'class':'form-check-input'}}) }}
+</div>
+
+</div>
+<div class="row-justify-content-center">
+<div class="col-6">
+{{ form_row(form.Hopital,{'attr':{'class':'form-control'}}) }}
+</div>
+
+</div>
+
+<br>
+<div>
+<button class="btn btn-info">{{ button_label|default('Save') }}</button>
+</div>
+<br>
+
+{{ form_end(form) }} 

@@ -1,0 +1,102 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block stylesheet %}
+	{{parent()}}
+{% endblock %}
+{% block sidebar %}
+	{{parent()}}
+{% endblock %}
+
+{% block Dashboard %}
+	<div class="main-panel">
+		<div class="container">
+			<div class="page-inner">
+				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+
+					<div>
+						<h3 class="fw-bold mb-3">Dashboard</h3>
+
+					</div>
+
+				</div>
+				<table id="myTable" style="width:100%">
+					<tbody></tbody>
+					<thead>
+						<tr>
+
+							<th>Id</th>
+							<th>Titre</th>
+							<th>Description</th>
+							<th>Datedeb</th>
+							<th>Datefin</th>
+							<th>Lieu</th>
+							<th>actions</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>
+								{% for evennement in evennements %}
+									<tr>
+										<td>{{ evennement.id }}</td>
+										<td>{{ evennement.titre }}</td>
+										<td>{{ evennement.description }}</td>
+										<td>{{ evennement.datedeb ? evennement.datedeb|date('Y-m-d') : '' }}</td>
+										<td>{{ evennement.datefin ? evennement.datefin|date('Y-m-d') : '' }}</td>
+										<td>{{ evennement.lieu }}</td>
+
+										<td>
+
+											<a href="{{ path('app_evennement_show', {'id': evennement.id}) }}" class="btn btn-success">show</a>
+											<a href="{{ path('app_evennement_edit', {'id': evennement.id}) }}" class="btn btn-info">edit</a>
+											<a href="{{ path('app_evennement_delete', {'id': evennement.id}) }}" class="btn btn-primary">delete</a>
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="7">no records found</td>
+									</tr>
+								{% endfor %}
+							</th>
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-3">
+			<a href="{{ path('app_evennement_new') }}" class="btn btn-secondary">
+				<h5>Create new
+				</h5>
+			</a>
+		</div>
+
+	</div>
+</div>
+
+
+{% block footer %}
+
+
+	<footer class="footer">
+		<div class="container-fluid d-flex justify-content-between">
+			<nav class="pull-left">
+				<ul class="nav"></ul>
+			</nav>
+			<div class="copyright">
+				2024, made with
+				<i class="fa fa-heart heart text-danger"></i>
+				by
+				<a href="http://www.themekita.com">Symfony</a>
+			</div>
+			<div>
+				Distributed by
+				<a target="_blank" href="https://themewagon.com/">Mon_Site</a>.
+			</div>
+		</div>
+	</footer>
+
+
+{% endblock %}</div>{% endblock %}{% block javascript %}{{parent()}}{% endblock %}

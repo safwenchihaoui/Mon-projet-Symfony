@@ -1,0 +1,83 @@
+{% extends 'adminbase.html.twig' %}
+
+
+{% block stylesheet %}
+	{{parent()}}
+{% endblock %}
+
+{% block Dashboard %}
+	<div class="main-panel">
+		<div class="container">
+			<div class="page-inner">
+				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"></div>
+
+
+				<h1>Outil index</h1>
+
+				<table id="myTable" class="table" width="100%">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Titre</th>
+							<th>Description</th>
+							
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for outil in outils %}
+							<tr>
+								<td>{{ outil.id }}</td>
+								<td>{{ outil.titre }}</td>
+								<td>{{ outil.description }}</td>
+								
+								<td>
+									<a href="{{ path('app_outil_show', {'id': outil.id}) }}"class="btn btn-info">show</a>
+									<a href="{{ path('app_outil_edit', {'id': outil.id}) }}"class="btn btn-dark">edit</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="7">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				<a href="{{ path('app_outil_new') }}" class="btn btn-primary">Create new</a>
+			</div>
+		</div>
+
+
+		{% block footer %}
+
+
+			<footer class="footer">
+				<div class="container-fluid d-flex justify-content-between">
+					<nav class="pull-left">
+						<ul class="nav"></ul>
+					</nav>
+					<div class="copyright">
+						2024, made with
+						<i class="fa fa-heart heart text-danger"></i>
+						by
+						<a href="http://www.themekita.com">Symfony</a>
+					</div>
+					<div>
+						Distributed by
+						<a target="_blank" href="https://themewagon.com/">Mon_Site</a>.
+					</div>
+				</div>
+			</footer>
+
+
+		{% endblock %}
+	</div>
+
+
+{% endblock %}
+
+
+{% block javascript %}
+	{{parent()}}
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Slider index{% endblock %}
+{% block stylesheet %}
+ {{parent()}}
+   
+{% endblock %}
+
+{% block body %}
+    
+
+
+
+<div class="main-panel">
+    <div class="container">
+        <div class="page-inner">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-round">
+                <div class="card-header">
+                  <div class="card-head-row card-tools-still-right">
+                    <h4 class="card-title">Slider index</h4>
+                    
+                  </div>
+                
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="table-responsive table-hover table-sales">
+
+       <table id="myTable" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Image</th>
+                <th>Etat</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Lieu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for slider in sliders %}
+            <tr>
+                <td>{{ slider.id }}</td>
+                <td>{{ slider.image }}</td>
+                <td>{{ slider.etat }}</td>
+                <td>{{ slider.titre }}</td>
+                <td>{{ slider.description }}</td>
+                <td>{{ slider.lieu }}</td>
+                <td>
+                    <a href="{{ path('app_slider_show', {'id': slider.id}) }}" class="btn btn-success">show</a>
+                    <a href="{{ path('app_slider_edit', {'id': slider.id}) }}"class="btn btn-info" >edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

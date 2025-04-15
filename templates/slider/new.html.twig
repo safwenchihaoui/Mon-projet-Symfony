@@ -1,0 +1,41 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}New Slider{% endblock %}
+{% block stylesheet %}
+{{parent()}}
+
+{% endblock %}
+{% block body %}
+    <h1>Create new Slider</h1>
+
+
+
+
+    <div class="main-panel">
+    <div class="container">
+        <div class="page-inner">
+            <div class="container">
+            <div class="page-inner">
+                <div class="row justify-content-center">
+                 <div class="col-10 text-primary">
+                    <h5 class="text-center text-secondery mt-4 pt-4 display-1 fw-bold">créer_slider</h5>
+                    <br>
+                    {{ include('slider/_form.html.twig') }}
+                    <br>
+
+                            <a href="{{ path('app_slider_index') }}">back to list</a> 
+                </div>
+                </div>
+                
+                </div>
+              
+            </div>
+            </div>
+        </div>
+    
+    </div>     
+    </div> 
+       
+
+   
+{% endblock %}

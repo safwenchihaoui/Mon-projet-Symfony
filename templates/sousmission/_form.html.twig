@@ -1,0 +1,88 @@
+{{ form_start(form, {'attr': {'class': 'container mt-4'}}) }}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.Evennement, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.date, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.theme, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.resume, {'attr': {'class': 'form-control', 'placeholder': 'Résumé de la soumission...'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.nom_auteur_correspond, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.prenom_auteur_correspond, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.email_auteur_correspond, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 mb-3">
+        {{ form_row(form.fichier, {'attr': {'class': 'form-control'}}) }}
+    </div>
+</div>
+
+<h5 class="text-secondary text-center mt-4">Ajout des auteurs</h5>
+
+<div class="row justify-content-center mb-3">
+    <div class="col-md-8 d-flex justify-content-end">
+        <button type="button" id="add-auteur" class="btn btn-outline-success mb-3">+ Ajouter un auteur</button>
+    </div>
+    <div class="col-md-8">
+        <div id="auteurs-wrapper" data-prototype="{{ form_widget(form.auteurs.vars.prototype)|e('html_attr') }}">
+            {% for auteurForm in form.auteurs %}
+                <div class="row auteur-form mb-3 border rounded p-2 bg-light">
+                    <div class="col-md-4">
+                        {{ form_row(auteurForm.nom, {'label': 'Nom', 'label_attr': {'class': 'text-primary'}}) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(auteurForm.prenom, {'label': 'Prénom', 'label_attr': {'class': 'text-primary'}}) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(auteurForm.email, {'label': 'Email', 'label_attr': {'class': 'text-primary'}}) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8 text-end">
+        <button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+    </div>
+</div>
+
+{{ form_end(form) }}

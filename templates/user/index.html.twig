@@ -1,0 +1,86 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <div class="main-panel">
+    <div class="container">
+        <div class="page-inner">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-round">
+                <div class="card-header">
+                  <div class="card-head-row card-tools-still-right">
+                    <h3 class="card-title" >liste_User</h3>
+                    
+                   </div>
+                
+                  </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="table-responsive table-hover table-sales"> 
+
+        <table id="myTable"  style="width:100%">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                
+                <th>Nom</th>
+                <th>prenom</th>
+                <th>Age</th>
+        
+                 <th>Actions</th>
+        </thead>
+        <tbody>
+          
+           
+           
+          
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles|join(', ') }}</td>
+                
+                
+                
+                
+                
+                
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                 <td>{{ user.age }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}"class="btn btn-primary btn-xs"   >show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}"  class="btn btn-info btn-xs" >edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+           
+            
+
+                
+          
+        </tbody>
+        
+        </table>
+       
+    </div>
+     </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

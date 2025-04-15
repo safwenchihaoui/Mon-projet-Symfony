@@ -1,0 +1,91 @@
+
+{% extends 'adminbase.html.twig' %}
+
+{% block stylesheet %}
+	{{parent()}}
+{% endblock %}
+{% block sidebar %}
+	{{parent()}}
+{% endblock %}
+
+{% block Dashboard %}
+	<div class="main-panel">
+		<div class="container">
+			<div class="page-inner">
+				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+
+					<div>
+						<h3 class="fw-bold mb-3">Dashboard</h3>
+
+					</div>
+
+				</div>
+				<table id="myTable" class="table table-sm" width="100%">
+					<tbody>
+						<tr>
+							<th>Id</th>
+							<td>{{ evennement.id }}</td>
+						</tr>
+						<tr>
+							<th>Titre</th>
+							<td>{{ evennement.titre }}</td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td>{{ evennement.description }}</td>
+						</tr>
+						<tr>
+							<th>Datedeb</th>
+							<td>{{ evennement.datedeb ? evennement.datedeb|date('Y-m-d') : '' }}</td>
+						</tr>
+						<tr>
+							<th>Datefin</th>
+							<td>{{ evennement.datefin ? evennement.datefin|date('Y-m-d') : '' }}</td>
+						</tr>
+						<tr>
+							<th>Lieu</th>
+							<td>{{ evennement.lieu }}</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<a href="{{ path('app_evennement_index') }}">back to list</a>
+				<br>
+				<a href="{{ path('app_evennement_edit', {'id': evennement.id}) }}" class="btn btn-primary">edit</a>
+				<br>
+				{{ include('evennement/_delete_form.html.twig') }}
+
+			</div>
+		</div>
+
+
+		{% block footer %}
+
+
+			<footer class="footer">
+				<div class="container-fluid d-flex justify-content-between">
+					<nav class="pull-left">
+						<ul class="nav"></ul>
+					</nav>
+					<div class="copyright">
+						2024, made with
+						<i class="fa fa-heart heart text-danger"></i>
+						by
+						<a href="http://www.themekita.com">Symfony</a>
+					</div>
+					<div>
+						Distributed by
+						<a target="_blank" href="https://themewagon.com/">Mon_Site</a>.
+					</div>
+				</div>
+			</footer>
+
+
+		{% endblock %}
+	</div>
+
+
+{% endblock %}
+{% block javascript %}
+	{{parent()}}
+{% endblock %}

@@ -1,0 +1,118 @@
+{%   extends 'base.html.twig' %}
+
+
+{% block stylesheet %}
+	{{parent()}}
+{% endblock %}
+{% block navbar %}
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container mt-5 mb-5">
+		<div class="row justify-content-center">
+			<div class="col-md-12">
+
+				<h2 class="text-center mb-4">Soumettre d'Abstract</h2>
+
+
+				{{ form_start(form) }}
+
+				<div class="row mb-3">
+					<div class="col-md-12">
+						{{ form_row(form.titre, {'label_attr': {'class': 'text-primary'}}) }}
+					</div>
+				</div>
+				<div class="row mb-3">
+
+					<div class="col-md-12">
+						{{ form_row(form.Evennement, {'attr': {'class': 'form-control'},
+											'label_attr': {'class': 'text-primary'}}) }}
+					</div>
+				</div>
+				<div class="row mb-3">
+
+					<div class="col-md-12">
+						{{ form_row(form.date, {'attr': {'class': 'form-control'},
+											'label_attr': {'class': 'text-primary'}}) }}
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col-md-12">
+
+						{{ form_row(form.theme, {'label_attr': {'class': 'text-primary'},
+					'attr': {'class': 'form-control'}}) }}
+					</div>
+				</div>
+
+				<div class="mb-3">
+					{{ form_row(form.resume) }}
+
+				</div>
+
+
+				<div class="row mb-3">
+					<div class="col-md-6">
+						{{ form_row(form.nom_auteur_correspond, {'label_attr': {'class': 'text-primary'}}) }}
+					</div>
+					<div class="col-md-6">
+						{{ form_row(form.prenom_auteur_correspond, {'label_attr': {'class': 'text-primary'}}) }}
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-md-6">
+						{{ form_row(form.email_auteur_correspond, {'label_attr': {'class': 'text-primary'}}) }}
+					</div>
+					<div class="col-md-6">
+						{{ form_row(form.fichier, {'label_attr': {'class': 'text-primary'}}) }}
+					</div>
+
+				</div>
+
+
+				<h5 class="text-secondary mt-4">Ajout-auteurs</h5>
+				<div class="row mb-3">
+					<div class="col-md-2 d-flex align-items-start">
+						<button type="button" id="add-auteur" class="btn btn-success">Ajouter un auteur</button>
+					</div>
+					<div class="col-md-10">
+						<div id="auteurs-wrapper" data-prototype="{{ form_widget(form.auteurs.vars.prototype)|e('html_attr') }}">
+							{% for auteurForm in Sousmission.auteurs %}
+								<div class="row auteur-form mb-3">
+									<div class="col-md-4">
+										{{ form_row(auteurForm.nom, {'label': 'Nom', 'label_attr': {'class': 'text-primary'}}) }}
+									</div>
+									<div class="col-md-4">
+										{{ form_row(auteurForm.prenom, {'label': 'Prénom', 'label_attr': {'class': 'text-primary'}}) }}
+									</div>
+									<div class="col-md-4">
+										{{ form_row(auteurForm.email, {'label': 'Email', 'label_attr': {'class': 'text-primary'}}) }}
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+
+				<div class="text mt-4">
+					<button class="btn btn-primary">Valider</button>
+				</div>
+
+				{{ form_end(form) }}
+
+			</div>
+		</div>
+
+	</div>
+
+
+	{% block javascript %}
+		{{parent()}}
+
+
+	{% endblock %}
+
+{% endblock %}

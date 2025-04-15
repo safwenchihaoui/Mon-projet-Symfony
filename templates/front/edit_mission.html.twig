@@ -1,0 +1,60 @@
+{% extends 'base.html.twig '%}
+
+
+{% block stylesheet %}
+	{{parent()}}
+
+{% endblock %}
+
+{% block navbar %}
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container mt-5  mb-5">
+
+		{{ form_start(form) }}
+		  {{ form_row(form.titre, {'label': 'Titre'}) }}
+
+		
+		<label for="{{ form.theme.vars.id }}">Thème</label>
+		<select name="{{ form.theme.vars.full_name }}" id="{{ form.theme.vars.id }}" class="form-control">
+			{% for choice in form.theme.vars.choices %}
+				<option value="{{ choice.value }}" {% if choice.value == form.theme.vars.value %} selected {% endif %}>
+					{{ choice.label }}
+				</option>
+			{% endfor %}
+		</select>
+		
+		<label for="{{ form.resume.vars.id }}">{{ form.resume.vars.label }}</label>
+		<textarea name="{{ form.resume.vars.full_name }}" id="{{ form.resume.vars.id }}" class="form-control" placeholder="Le résumé de l'abstract doit comporter :
+			Introduction ou objectifs
+			Méthodes
+			Résultats
+			Conclusions">{{ form.resume.vars.value }}</textarea>
+		
+
+
+		{{ form_row(form.nom_auteur_correspond,{'label':'NOM_auteur_correspond'}) }}
+		{{ form_row(form.prenom_auteur_correspond,{'label':'Prenom_auteur_correspond'}) }}
+		{{ form_row(form.email_auteur_correspond,{'label':'Email_auteur_correspond'}) }}
+		{{ form_row(form.fichier,{'label':'Fichier'}) }}
+
+		<button type="button" id="add-auteur" class="btn btn-secondary mt-3">Ajouter un auteur</button>
+
+
+		{{ form_end(form) }}
+
+
+	</div>
+
+
+
+{% endblock %}
+
+{% block javascript %}
+	{{parent()}}
+{% endblock %}

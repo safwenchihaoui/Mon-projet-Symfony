@@ -1,0 +1,85 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block stylesheet %}
+ {{parent()}}
+{% endblock %}
+{% block sidebar %}
+ {{parent()}}
+{% endblock %}
+
+
+
+
+{% block Dashboard %}
+    <div class="main-panel">
+          <div class="container">
+            <div class="page-inner">
+              <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4" >
+               
+                            <div>
+                              <h3 class="fw-bold mb-3">Dashboard</h3>
+              
+                           </div>
+              
+                         </div>
+          {{ include('categorie_recommand/_form.html.twig') }}
+
+     <a href="{{ path('app_categorie_recommand_index') }}">back to list</a>
+              </div>
+           </div>
+          
+
+     
+    
+          {% block footer %}
+
+
+
+                
+                <footer class="footer">
+                  <div class="container-fluid d-flex justify-content-between">
+                    <nav class="pull-left">
+                      <ul class="nav">
+                      
+                      
+                      </ul>
+                    </nav>
+                    <div class="copyright">
+                      2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                      <a href="http://www.themekita.com">Symfony</a>
+                    </div>
+                    <div>
+                      Distributed by
+                      <a target="_blank" href="https://themewagon.com/">Mon_Site</a>.
+                    </div>
+                  </div>
+                </footer>
+              
+
+          {% endblock %}
+     </div> 
+
+
+ {% endblock %}
+          
+  
+          
+            
+       
+
+
+
+
+
+
+    
+
+
+   
+
+
+
+
+{% block javascript %}
+ {{parent()}}
+{% endblock %}

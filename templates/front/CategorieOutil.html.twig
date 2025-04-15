@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet %}
+	{{parent()}}
+
+{% endblock %}
+
+{% block navbar %}
+	{{parent()}}
+{% endblock %}
+{% block body %}
+	<div class="container pb-5">
+		<h2 class="text-center mt-5 mb-3">Outils d'évaluation</h2>
+		<div class="row">
+			<div class="col-4 mt-5">
+				<div class="list-group" id="list-tab" role="tablist">
+					{% for key, CategorieOutil in CategorieOutils %}
+						<a class="list-group-item list-group-item-action {% if key == 0 %}active{% endif %}" id="list-{{ CategorieOutil.id }}-list" data-toggle="list" href="#list-{{ CategorieOutil.id }}" role="tab" aria-controls="{{ CategorieOutil.id }}">
+							{{ CategorieOutil.titre }}
+						</a>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col-8">
+				<div class="tab-content" id="nav-tabContent">
+					{% for key, CategorieOutil in CategorieOutils %}
+						<div class="tab-pane fade {% if  key == 0 %}show active{% endif %}" id="list-{{CategorieOutil.id}}" role="tabpanel" aria-labelledby="list-{{CategorieOutil.id}}-list">
+							<div class="accordion mt-5" id="accordion-{{ CategorieOutil.id }}">
+								<h6 class="text-center">
+									<span>{{ CategorieOutil.titre }}</span>
+								</h6>
+								{% for SouscategorieOutil in SouscategorieOutils %}
+									{% if SouscategorieOutil.CategorieOutil.id == CategorieOutil.id %}
+										<div class="card mt-3">
+											<div class="card-header" id="{{ SouscategorieOutil.id }}">
+												<h2 class="mb-0 text-center">
+													<button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#collapse-{{ SouscategorieOutil.id }}" aria-expanded="true" aria-controls="-{{ SouscategorieOutil.id }}">
+														{{ SouscategorieOutil.titre }}
+													</button>
+												</h2>
+											</div>
+
+											<div id="collapse-{{ SouscategorieOutil.id }}" class="collapse" aria-labelledby="heading-{{ SouscategorieOutil.id }}" data-parent="#accordion-{{ CategorieOutil.id }}">
+												<div class="card-body">
+													<div class="row">
+														{% for outil in Outils %}
+															{% if outil.SouscategorieOutil.id == SouscategorieOutil.id %}
+																<div class="col-md-6">
+																	<a href="{{outil.lien}}">
+																		<img class="card-img-top" src="{{ asset('/img/'~ outil.image) }}" alt="{{ outil.image }}" height="100px" width="100px" target="_blank">
+																	</a>
+																	<h4 class="card-title">
+																		<a href="{{outil.lien}}" target="_blank">{{ outil.titre }}</a>
+																	</h4>
+
+																	   <a href="{{outil.lien}}" target="_blank" class="btn btn-outline-primary btn-block ">
+																		<i class="flaticon-world"></i>en ligne</a>
+																		
+																	<a href="{{ '/img/' ~ outil.pdf }}" target="_blank" class="btn btn-outline-primary btn-block ">
+																		<i class="fi fi-rs-file-pdf"></i>en PDF</a>
+																	
+																		
+
+																</div>
+															{% endif %}
+														{% endfor %}
+													</div>
+												</div>
+											</div>
+										</div>
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% block footer %}
+
+		{{parent()}}
+	{% endblock %}
+	{% block javascript %}
+
+		{{parent()}}
+	{% endblock %}
+{% endblock %}

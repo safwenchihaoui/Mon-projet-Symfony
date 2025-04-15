@@ -1,0 +1,768 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Medicalcul - Questionnaire HAQ ~ Rhumatologie</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <script type="text/javascript" src="_scripts.js"></script>
+        <!-- <script type="text/javascript">f_ChooseCss();</script> -->
+        <link rel="stylesheet" href="styles.css" type="text/css"/>
+
+        <script type="text/javascript">
+            // ===========================================================================================
+            // Fonction de calcul de la page
+            function f_Calculer()
+            {
+                // calcul du résultat
+                var Questions = []; // Récupère la liste des questions de base
+                for (var i = 1; i <= 20; i++)
+                    Questions[i] = f_GetRadioValue('vItem' + i) * 1;
+                
+                var Items = []; // Regroupe les questions en 8 items
+                Items[1] = Math.max(Questions[1], Questions[2]); // S'habiller et se préparer
+                Items[2] = Math.max(Questions[3], Questions[4]); // Se lever
+                Items[3] = Math.max(Questions[5], Questions[6], Questions[7]); // Manger
+                Items[4] = Math.max(Questions[8], Questions[9]); // Marcher
+                Items[5] = Math.max(Questions[10], Questions[11], Questions[12]); // Hygiène
+                Items[6] = Math.max(Questions[13], Questions[14]); // Atteindre et attraper un objet
+                Items[7] = Math.max(Questions[15], Questions[16], Questions[17]); // Préhension
+                Items[8] = Math.max(Questions[18], Questions[19], Questions[20]); // Autres activités
+
+                // Assignations aides techniques
+                var TechAid = [];
+                for (var i = 1; i <= 20; i++) {
+                    var x = f_GetRadioValue('vItemA' + i) * 1;
+                    if(x > 0)
+                        TechAid[i] = x;
+                    else
+                        TechAid[i] = -1;
+                }
+                Items[1] = Math.max(Items[1], TechAid[2], TechAid[8]); // S'habiller et se préparer
+                Items[2] = Math.max(Items[2], TechAid[6], TechAid[9]); // Se lever
+                Items[3] = Math.max(Items[3], TechAid[4], TechAid[10]); // Manger
+                Items[4] = Math.max(Items[4], TechAid[1], TechAid[3], TechAid[5], TechAid[7], TechAid[11]); // Marcher
+                Items[5] = Math.max(Items[5], TechAid[12], TechAid[13], TechAid[14], TechAid[17]); // Hygiène
+                Items[6] = Math.max(Items[6], TechAid[15], TechAid[18]); // Atteindre et attraper un objet
+                Items[7] = Math.max(Items[7], TechAid[16], TechAid[19]); // Préhension
+                Items[8] = Math.max(Items[8], TechAid[20]); // Autres activités
+                
+                
+                // Assignations aides tierce personne
+                for (var i = 1; i <= 8; i++) {
+                    var x = f_GetRadioValue('vItemB' + i) * 1;
+                    if(x > 0)
+                        Items[i] = Math.max(Items[i], x);
+                }
+                
+                // Décompte des items renseignés (les items modifiés par des aides sont considérés renseignés)
+                var NbrItems = 0;
+                var Res = 0;
+                for (var i = 1; i <= 8; i++) {
+                    if(Items[i] >= 0) {
+                        Res += Items[i];
+                        NbrItems++;
+                    }
+                }
+                
+                if(NbrItems > 0)
+                    Res /= NbrItems;
+                else
+                    Res = "";
+                
+                // Affichage du résultat
+                document.Form.Resultat.value = Res;
+
+                try {
+                    MSSAndroidFunction.storeHistory(f_GetFilename(), "Questionnaire HAQ", "rhumatologie", "Résultat:", Res);
+                } catch (e) {
+                }
+            }
+            // ======================================================================================
+        </script>
+    </head>
+
+    <body class="scorebody">
+        <p class="scoretitle_title">Questionnaire HAQ<br/>(Health Assessment Questionnaire)<br />
+            <img src="zzimgspe_rhumatologie.png" class="scoretitle_image"/><br />
+            <span class="scoretitle_separator">-----</span></p>
+
+            <p align="center"><font color="#0000FF"><strong>Pour chaque item, veuillez indiquer la réponse qui décrit le mieux vos capacités au cours des 8 derniers jours.</strong></font><br/>&nbsp;</p>
+        <form name="Form" id="Form">
+
+            <table class="score_table"> <!-- Boutons radios choix multiples avec items titres -->
+                <tr>
+                    <td colspan="2"><font color="#0000FF" size="+1"><strong>S'habiller et se préparer</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Vous habiller, y compris nouer vos lacets et boutonner vos vêtements ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem1" id="vItem1.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem1.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem1" id="vItem1.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem1.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem1" id="vItem1.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem1.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem1" id="vItem1.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem1.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem1" id="vItem1.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem1.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Vous laver les cheveux ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem2" id="vItem2.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem2.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem2" id="vItem2.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem2.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem2" id="vItem2.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem2.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem2" id="vItem2.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem2.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem2" id="vItem2.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem2.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                
+                <tr>
+                    <td colspan="2"><br/>&nbsp;<br/><font color="#0000FF" size="+1"><strong>Se lever</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Vous lever d’une chaise ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem3" id="vItem3.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem3.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem3" id="vItem3.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem3.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem3" id="vItem3.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem3.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem3" id="vItem3.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem3.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem3" id="vItem3.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem3.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Vous mettre au lit et vous lever du lit ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem4" id="vItem4.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem4.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem4" id="vItem4.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem4.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem4" id="vItem4.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem4.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem4" id="vItem4.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem4.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem4" id="vItem4.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem4.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                
+                <tr>
+                    <td colspan="2"><br/>&nbsp;<br/><font color="#0000FF" size="+1"><strong>Manger</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Couper votre viande ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem5" id="vItem5.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem5.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem5" id="vItem5.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem5.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem5" id="vItem5.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem5.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem5" id="vItem5.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem5.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem5" id="vItem5.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem5.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Porter à votre bouche une tasse ou un verre bien plein ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem6" id="vItem6.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem6.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem6" id="vItem6.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem6.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem6" id="vItem6.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem6.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem6" id="vItem6.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem6.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem6" id="vItem6.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem6.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Ouvrir une brique de lait ou de jus de fruit ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem7" id="vItem7.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem7.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem7" id="vItem7.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem7.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem7" id="vItem7.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem7.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem7" id="vItem7.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem7.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem7" id="vItem7.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem7.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                
+                <tr>
+                    <td colspan="2"><br/>&nbsp;<br/><font color="#0000FF" size="+1"><strong>Marcher</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Marcher en terrain plat à l’extérieur ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem8" id="vItem8.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem8.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem8" id="vItem8.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem8.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem8" id="vItem8.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem8.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem8" id="vItem8.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem8.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem8" id="vItem8.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem8.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Monter 5 marches ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem9" id="vItem9.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem9.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem9" id="vItem9.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem9.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem9" id="vItem9.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem9.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem9" id="vItem9.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem9.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem9" id="vItem9.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem9.3">3 - Incapable de le faire.</label></td>
+                </tr>
+            </table>                
+
+            
+            <table class="score_table" style="border-collapse: separate; border-spacing: 0 0.5em;"> <!-- Checkbox non regroupées items simples -->
+                <tr>
+                    <td colspan="2"><br/><font color="#0000FF"><strong>Cocher toute aide technique utilisée pour n’importe laquelle de ces activités</strong></font><br /></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA1" id="vItemA1" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA1">Canne.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA2"  id="vItemA2" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA2">Accessoires pour s’habiller (crochet à bouton ou fermeture-éclair chausse-pied à long manche...).</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA3" id="vItemA3" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA3">Déambulateur.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA4" id="vItemA4" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA4">Ustensile spécialement adapté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA5" id="vItemA5" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA5">Béquilles.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA6" id="vItemA6" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA6">Chaise spécialement adaptée</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA7" id="vItemA7" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA7">Chaise roulante.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA8" id="vItemA8" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA8">Autres pour <i>S'habiller ou se préparer</i>.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA9" id="vItemA9" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA9">Autres pour <i>Se lever</i>.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA10" id="vItemA10" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA10">Autres pour <i>Manger</i>.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA11" id="vItemA11" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA11">Autres pour <i>Marcher</i>.</label></td>
+                </tr>
+            </table>
+
+            <table class="score_table" style="border-collapse: separate; border-spacing: 0 0.5em;"> <!-- Checkbox non regroupées items simples -->
+                <tr>
+                    <td colspan="2"><font color="#0000FF"><strong>Cocher toutes catégories pour lesquelles vous avez besoin de l’aide d’une tierce personne</strong></font><br /></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB1" id="vItemB1" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB1">S'habiller ou se préparer.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB2" id="vItemB2" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB2">Se lever.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB3" id="vItemB3" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB3">Manger.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB4" id="vItemB4" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB4">Marcher.</label></td>
+                </tr>
+            </table>
+
+            
+            <table class="score_table"> <!-- Boutons radios choix multiples avec items titres -->
+                <tr>
+                    <td colspan="2"><br/>&nbsp;<br/><font color="#0000FF" size="+1"><strong>Hygiène</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Vous laver et vous sécher entièrement ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem10" id="vItem10.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem10.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem10" id="vItem10.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem10.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem10" id="vItem10.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem10.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem10" id="vItem10.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem10.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem10" id="vItem10.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem10.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Prendre un bain ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem11" id="vItem11.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem11.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem11" id="vItem11.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem11.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem11" id="vItem11.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem11.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem11" id="vItem11.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem11.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem11" id="vItem11.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem11.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Vous asseoir et vous relever d'un siège de toilettes ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem12" id="vItem12.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem12.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem12" id="vItem12.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem12.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem12" id="vItem12.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem12.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem12" id="vItem12.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem12.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem12" id="vItem12.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem12.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                
+                <tr>
+                    <td colspan="2"><br/>&nbsp;<br/><font color="#0000FF" size="+1"><strong>Atteindre et attraper un objet</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Atteindre et prendre un objet pesant 2,5kg situé au-dessus de votre tête ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem13" id="vItem13.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem13.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem13" id="vItem13.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem13.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem13" id="vItem13.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem13.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem13" id="vItem13.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem13.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem13" id="vItem13.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem13.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Vous baisser pour ramasser un vêtement par terre ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem14" id="vItem14.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem14.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem14" id="vItem14.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem14.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem14" id="vItem14.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem14.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem14" id="vItem14.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem14.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem14" id="vItem14.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem14.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2"><br/>&nbsp;<br/><font color="#0000FF" size="+1"><strong>Préhension</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Ouvrir une porte de voiture ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem15" id="vItem15.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem15.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem15" id="vItem15.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem15.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem15" id="vItem15.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem15.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem15" id="vItem15.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem15.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem15" id="vItem15.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem15.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Dévisser le couvercle d’un pot déjà ouvert une fois ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem16" id="vItem16.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem16.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem16" id="vItem16.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem16.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem16" id="vItem16.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem16.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem16" id="vItem16.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem16.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem16" id="vItem16.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem16.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Ouvrir et fermer un robinet ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem17" id="vItem17.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem17.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem17" id="vItem17.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem17.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem17" id="vItem17.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem17.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem17" id="vItem17.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem17.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem17" id="vItem17.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem17.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                
+                <tr>
+                    <td colspan="2"><br/>&nbsp;<br/><font color="#0000FF" size="+1"><strong>Autres activités</strong></font></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Faire vos courses ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem18" id="vItem18.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem18.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem18" id="vItem18.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem18.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem18" id="vItem18.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem18.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem18" id="vItem18.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem18.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem18" id="vItem18.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem18.3">3 - Incapable de le faire.</label></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Monter et descendre de voiture ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem19" id="vItem19.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem19.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem19" id="vItem19.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem19.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem19" id="vItem19.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem19.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem19" id="vItem19.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem19.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem19" id="vItem19.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem19.3">3 - Incapable de le faire.</label></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2"><br/><strong>Etes-vous capable de :<br/>&nbsp;&nbsp;Faire des travaux ménagers tels que passer l'aspirateur ou faire du petit jardinage ?</strong></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem20" id="vItem20.4" type="radio" value="-1" onclick="f_Calculer()" checked="checked"/></td>
+                    <td valign="top"><label for="vItem20.4">X - Non évaluable.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem20" id="vItem20.0" type="radio" value="0" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem20.0">0 - Sans aucune difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem20" id="vItem20.1" type="radio" value="1" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem20.1">1 - Avec quelque difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem20" id="vItem20.2" type="radio" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem20.2">2 - Avec beaucoup de difficulté.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItem20" id="vItem20.3" type="radio" value="3" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItem20.3">3 - Incapable de le faire.</label></td>
+                </tr>
+            </table>
+
+            
+            <table class="score_table" style="border-collapse: separate; border-spacing: 0 0.5em;"> <!-- Checkbox non regroupées items simples -->
+                <tr>
+                    <td colspan="2"><br/><font color="#0000FF"><strong>Cocher toute aide technique utilisée pour n’importe laquelle de ces activités</strong></font><br /></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA12" id="vItemA12" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA12">Siège de WC surélevé.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA13"  id="vItemA13" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA13">Poignée ou barre de baignoire.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA14" id="vItemA14" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA14">Siège de baignoire.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA15" id="vItemA15" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA15">Instrument à long manche pour attraper les objets.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA16" id="vItemA16" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA16">Ouvre-pots (pour les pots déjà ouverts).</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA17" id="vItemA17" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA17">Autres pour <i>Hygiène</i>.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA18" id="vItemA18" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA18">Autres pour <i>Atteindre et attraper un objet</i>.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA19" id="vItemA19" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA19">Autres pour <i>Préhension</i>.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemA20" id="vItemA20" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemA20">Autres pour <i>Autres activités</i>.</label></td>
+                </tr>
+            </table>
+
+            <table class="score_table" style="border-collapse: separate; border-spacing: 0 0.5em;"> <!-- Checkbox non regroupées items simples -->
+                <tr>
+                    <td colspan="2"><font color="#0000FF"><strong>Cocher toutes catégories pour lesquelles vous avez besoin de l’aide d’une tierce personne</strong></font><br /></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB5" id="vItemB5" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB5">Hygiène.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB6" id="vItemB6" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB6">Atteindre et attraper un objet.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB7" id="vItemB7" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB7">Préhension.</label></td>
+                </tr>
+                <tr>
+                    <td valign="top" align="right"><input name="vItemB8" id="vItemB8" type="checkbox" value="2" onclick="f_Calculer()" /></td>
+                    <td valign="top"><label for="vItemB8">Autres activités.</label></td>
+                </tr>
+            </table>
+            
+            <br />
+            <hr width="80%" />
+            <p align="center"><input name="Submit" type="button" onclick="f_Calculer()" value="Calculer" /></p>
+            <hr width="80%" />
+
+            <p class="score_result">
+                Résultat : <input name="Resultat" type="text" id="Resultat" style="width:3em" readonly="readonly"/>
+            </p>
+
+        </form>
+
+        <p class="score_inter">Interprétation:<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HAQ (Health Assessment Questionnaire) est un outil d’incapacité fonctionnelle spécifique de la polyarthrite rhumatoïde. L’évaluation porte sur la semaine écoulée et porte sur 8 domaines étudiant l’activité physique. Pour chacun des domaines d’activité, 2 à 3 items sont décrits. Chaque item peut être modifié par des aides. Seules les items avec réponse ou aide spécifiée sont pris en compte.<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Le résultat va de 0 (pas de retentissement) à 3 (retentissement maximal).<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pour des raisons techniques, les items "Autre" ont été divisés pour permettre de spécifier une autre aide pour chaque item.</p>
+
+        <p class="score_ref">Références:<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guillemin F, Briancon S, Pourel J. Mesure de la capacité fonctionnelle dans la polyarthrite rhumatoïde : adaptation française du health assessment questionnaire (HAQ). Rev Rhum Mal Osteartic 1991;58(6):459-65.<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fries JF, Spitz P, Kraines G, Holman H. Measurement of Patient Outcome in Arthritis, Arthritis and Rheumatism, 1980, 23:137-145.<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The health assessment questionnaire (HAQ) disability index (DI) of the clinical health assessment questionnaire (version 96.4): <a href="https://www.niehs.nih.gov/research/resources/assets/docs/haq_instructions_508.pdf">https://www.niehs.nih.gov/research/resources/assets/docs/haq_instructions_508.pdf</a>.</p>
+
+        <script type="text/javascript">include_footer();</script>
+    </body>
+</html>
